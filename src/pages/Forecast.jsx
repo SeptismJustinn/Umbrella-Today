@@ -6,14 +6,14 @@ import HourlyForecast from "../components/HourlyForecast";
 function Forecast() {
   const location = useLocation();
   const linkProps = location.state;
-  const hour = (Number(linkProps.date.slice(-2)) + 8) % 24;
+  const hour = linkProps.date.getHours() % 24;
   return (
     <>
       {!linkProps && <Navigate replace to="/" />}
       <div className={styles.forecastText}>
         <h2>
-          Forecast as at {linkProps.date.slice(6, 8)}/
-          {linkProps.date.slice(4, 6)}, {hour < 10 ? "0" + hour : hour}00Hrs
+          Forecast as at {linkProps.date.getDate()}/
+          {linkProps.date.getMonth() + 1}, {hour < 10 ? "0" + hour : hour}00Hrs
         </h2>
         <div className="container">
           <div className="row">
@@ -31,6 +31,7 @@ function Forecast() {
                 key={idx}
                 id={idx}
                 time={(hour + item.timepoint) % 24}
+                nextDay={item.timepoint > 24 - hour ? true : false}
                 forecast={item.weather}
                 prec={item.prec_amount}
                 temp={item.temp2m}

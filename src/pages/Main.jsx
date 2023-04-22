@@ -6,7 +6,7 @@ import DisclaimerCorner from "../components/DisclaimerCorner";
 
 function Main() {
   const [data, setData] = useState([]);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
 
   async function getData() {
     try {
@@ -18,8 +18,19 @@ function Main() {
       if (res.status === 200) {
         const weatherData = await res.json();
 
-        setDate(weatherData.init);
         // Clean data:
+        const currDate = new Date(
+          weatherData.init.slice(0, 4) +
+            "-" +
+            weatherData.init.slice(4, 6) +
+            "-" +
+            weatherData.init.slice(6, 8) +
+            "T" +
+            weatherData.init.slice(-2) +
+            ":00+00:00"
+        );
+        console.log(currDate);
+        setDate(currDate);
         setData(weatherData.dataseries.slice(0, 8));
       } else {
         throw new Error();
