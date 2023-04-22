@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import AstroCorner from "../components/AstroCorner";
+import ForecastCorner from "../components/ForecastCorner";
 
 function Main() {
   const [data, setData] = useState([]);
+  const [date, setDate] = useState("");
 
   async function getData() {
     try {
-      const res = await fetch("/weather-test-data-timer.json");
-
+      // 7timer's init is in UTC time.
+      // const res = await fetch("/weather-test-data-timer.json");
+      const res = await fetch(
+        "https://www.7timer.info/bin/api.pl?lon=103.8&lat=1.4&product=civil&output=json"
+      );
       if (res.status === 200) {
         const weatherData = await res.json();
-        setData(weatherData.dataseries);
+
+        setDate(weatherData.init);
+        // Clean data:
+        setData(weatherData.dataseries.slice(0, 8));
       } else {
         throw new Error();
       }
@@ -21,15 +29,13 @@ function Main() {
 
   useEffect(() => {
     getData();
-  });
+  }, []);
 
   return (
-    <div>
-      Main
-      <NavLink to="/forecast" state={{ data }}>
-        Forecast
-      </NavLink>
-    </div>
+    <>
+      <AstroCorner />
+      <ForecastCorner data={data} date={date} />
+    </>
   );
 }
 
