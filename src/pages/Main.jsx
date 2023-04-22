@@ -29,7 +29,6 @@ function Main() {
             weatherData.init.slice(-2) +
             ":00+00:00"
         );
-        console.log(currDate);
         setDate(currDate);
         setData(weatherData.dataseries.slice(0, 8));
       } else {
@@ -53,7 +52,7 @@ function Main() {
       <AstroCorner />
       <DisclaimerCorner />
       <ForecastCorner data={data} date={date} />
-      <Umbrella raining={checkRain()} />
+      <Umbrella raining={checkRain()} data={data} date={date} />
     </>
   );
 }

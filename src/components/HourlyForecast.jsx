@@ -26,7 +26,6 @@ function HourlyForecast(props) {
     "94%-100%",
   ];
   function decipherWeather(datasetString) {
-    console.log(datasetString);
     let string = datasetString;
     let output;
     let switchFlag = true;
