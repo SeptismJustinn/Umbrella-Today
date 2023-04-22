@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import AstroCorner from "../components/AstroCorner";
 import ForecastCorner from "../components/ForecastCorner";
+import Umbrella from "../components/Umbrella";
+import DisclaimerCorner from "../components/DisclaimerCorner";
 
 function Main() {
   const [data, setData] = useState([]);
@@ -27,6 +29,10 @@ function Main() {
     }
   }
 
+  function checkRain() {
+    return false;
+  }
+
   useEffect(() => {
     getData();
   }, []);
@@ -34,7 +40,9 @@ function Main() {
   return (
     <>
       <AstroCorner />
+      <DisclaimerCorner />
       <ForecastCorner data={data} date={date} />
+      <Umbrella raining={checkRain()} />
     </>
   );
 }

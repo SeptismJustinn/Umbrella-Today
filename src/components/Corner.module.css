@@ -1,0 +1,21 @@
+.topRight {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.topLeft {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.botRight {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+.botLeft {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
