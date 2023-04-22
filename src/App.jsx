@@ -1,10 +1,18 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Main from "./pages/Main";
+import Forecast from "./pages/Forecast";
+import Astronomy from "./pages/Astronomy";
 
 function App() {
   return (
-    <div>
-      <h2>GA SEI</h2>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/forecast" element={<Forecast />} />
+        <Route path="/astronomy" element={<Astronomy />} />
+      </Routes>
+    </>
   );
 }
 
