@@ -91,7 +91,11 @@ function HourlyForecast(props) {
   }
 
   return (
-    <div className={`row ${props.nextDay ? styles.next_day : ""}`}>
+    <div
+      className={`row ${
+        props.thirdDay ? styles.third_day : props.nextDay ? styles.next_day : ""
+      }`}
+    >
       <div className="col-md-1">
         {props.time < 12 ? props.time + "AM" : (props.time % 12) + "PM"}
       </div>

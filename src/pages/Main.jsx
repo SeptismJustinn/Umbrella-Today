@@ -17,7 +17,7 @@ function Main() {
   async function getData() {
     try {
       // 7timer's init is in UTC time.
-      const res = await fetch("/weather-test-rain.json");
+      const res = await fetch("/weather-test-clear.json");
       // const res = await fetch(
       //   "https://www.7timer.info/bin/api.pl?lon=103.8&lat=1.4&product=civil&output=json"
       // );
@@ -35,8 +35,13 @@ function Main() {
             ":00+00:00"
         );
         setDate(currDate);
-        setData(weatherData.dataseries.slice(0, 8));
-        if (new Date().getDate() - currDate.getDate() > 1) {
+        // Obtain next 48 hour's data.
+        setData(weatherData.dataseries.slice(0, 17));
+        if (
+          (new Date().getDate() - currDate.getDate()) * 24 +
+          new Date().getHours() -
+          currDate.getHours()
+        ) {
           setOutdated(true);
         } else {
           setOutdated(false);
@@ -53,24 +58,37 @@ function Main() {
   // Function to check if there will be rain in the next ~12hrs from rounded up hour at which component rendered.
   function checkRain() {
     const currTime = new Date();
-    let currHour = 17;
-    // let currHour = currTime.getHours() + (currTime.getMinutes() > 30 ? 1 : 0);
+    // Get current hour, rounded off.
+    let currHour = currTime.getHours() + (currTime.getMinutes() > 30 ? 1 : 0);
+    // If it is currently a day after dataset initialization, account for 24hour time's reset to 0.
     if (currTime.getDate() > date.getDate()) {
-      currHour += 24 - date.getHours();
-      console.log("Next day");
+      currHour += 24;
     }
+    // Get current timepoint in dataset.
     const timePoint = Math.floor((currHour - date.getHours()) / 3);
-    console.log(timePoint);
-    console.log(data);
+    // Check prec_type for the next 4 timepoints from database.
     const weather12Hr = [...data.slice(timePoint, timePoint + 4)].map(
       (item) => {
         return item.prec_type;
       }
     );
+    console.log("Timepoint: " + timePoint);
     console.log(weather12Hr);
-    if (weather12Hr.length === 0 || currTime.getDate() - date.getDate() > 1) {
+    console.log(
+      (currTime.getDate() - date.getDate()) * 24 +
+        (currTime.getHours() - date.getHours())
+    );
+    if (
+      weather12Hr.length === 0 ||
+      (currTime.getDate() - date.getDate()) * 24 +
+        (currTime.getHours() - date.getHours()) >
+        24
+    ) {
+      // If database is not updated in the last 24 hrs...\
+      console.log("Outdated: " + outdated);
       return true;
     } else {
+      // Check if any rain predicted
       return weather12Hr.includes("rain");
     }
   }
@@ -81,7 +99,7 @@ function Main() {
 
   return (
     <>
-      <AstroCorner />
+      <AstroCorner raining={checkRain()} />
       <AboutCorner />
       <ForecastCorner data={data} date={date} />
       <Umbrella

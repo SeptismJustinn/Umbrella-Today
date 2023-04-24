@@ -32,6 +32,7 @@ function Forecast() {
                 id={idx}
                 time={(hour + item.timepoint) % 24}
                 nextDay={item.timepoint > 24 - hour ? true : false}
+                thirdDay={item.timepoint > 48 - hour ? true : false}
                 forecast={item.weather}
                 prec={item.prec_amount}
                 temp={item.temp2m}
