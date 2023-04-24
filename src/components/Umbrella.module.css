@@ -4,11 +4,20 @@
 }
 
 .centered a {
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .centered div {
   text-align: center;
-  font-size: 60px;
+  font-size: 50px;
   color: aliceblue;
+}
+
+.centered img {
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.centered img:hover {
+  border: 2px solid rgba(10, 10, 10, 0.2);
+  border-radius: 20px;
 }
