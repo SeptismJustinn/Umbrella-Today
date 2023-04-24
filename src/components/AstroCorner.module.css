@@ -13,6 +13,7 @@
 .cloud_bottom,
 .cloud_bottomright,
 .cloud_right {
+  transition: linear 0.5s;
   position: absolute;
   top: 10vh;
 }

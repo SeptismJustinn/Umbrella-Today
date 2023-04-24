@@ -23,6 +23,7 @@ function LocationCorner(props) {
           currLocation={currLocation}
           setCurrLocation={setCurrLocation}
           setShowLocation={setShowLocation}
+          getData={props.getData}
         />
       )}
     </>

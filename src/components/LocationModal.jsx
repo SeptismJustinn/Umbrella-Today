@@ -146,17 +146,18 @@ function Overlay(props) {
         <br />
         <div className="row">
           <button
-            className="col-md-6"
+            className="btn btn-primary col-md-6"
             onClick={(event) => {
               event.preventDefault();
               adjustCoords();
+              props.getData();
               props.setShowLocation(false);
             }}
           >
             Confirm
           </button>
           <button
-            className="col-md-6"
+            className="btn btn-danger col-md-6"
             onClick={(event) => {
               event.preventDefault();
               props.setShowLocation(false);
@@ -177,6 +178,7 @@ function LocationModal(props) {
       currLocation={props.currLocation}
       setCurrLocation={props.setCurrLocation}
       setShowLocation={props.setShowLocation}
+      getData={props.getData}
     />,
     document.querySelector("#modal-root")
   );

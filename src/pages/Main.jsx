@@ -84,7 +84,6 @@ function Main() {
         24
     ) {
       // If database is not updated in the last 24 hrs...\
-      console.log("Outdated: " + outdated);
       return true;
     } else {
       // Check if any rain predicted
@@ -101,7 +100,7 @@ function Main() {
       <AstroCorner raining={checkRain()} />
       <AboutCorner />
       <ForecastCorner data={data} date={date} />
-      <LocationCorner setCoords={setCoords} coords={coords} />
+      <LocationCorner setCoords={setCoords} coords={coords} getData={getData} />
       <Umbrella
         raining={checkRain()}
         data={data}

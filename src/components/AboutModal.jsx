@@ -18,6 +18,9 @@ function Overlay(props) {
         </a>
         .
         <br />
+        Geolocation information will solely be used for query into 7Timer's API
+        in order to obtain more accurate forecasts.
+        <br />
         <br />
         Umbrella recommendation is made regardless of volume of rainfall. Should
         any instance of rain be predicted up to 12 hours from time of launching
