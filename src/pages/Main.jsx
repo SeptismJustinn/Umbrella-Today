@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AstroCorner from "../components/AstroCorner";
 import ForecastCorner from "../components/ForecastCorner";
 import Umbrella from "../components/Umbrella";
-import DisclaimerCorner from "../components/DisclaimerCorner";
+import AboutCorner from "../components/AboutCorner";
 
 // API used: 7timer
 function Main() {
@@ -82,7 +82,7 @@ function Main() {
   return (
     <>
       <AstroCorner />
-      <DisclaimerCorner />
+      <AboutCorner />
       <ForecastCorner data={data} date={date} />
       <Umbrella
         raining={checkRain()}
