@@ -18,3 +18,14 @@
   padding: 50px;
   border-radius: 50px;
 }
+
+.modal_small {
+  position: fixed;
+  background: aliceblue;
+  top: 20vh;
+  left: 35%;
+  width: 30%;
+  z-index: 100;
+  padding: 50px;
+  border-radius: 50px;
+}

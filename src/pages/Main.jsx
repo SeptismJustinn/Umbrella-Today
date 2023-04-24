@@ -3,6 +3,7 @@ import AstroCorner from "../components/AstroCorner";
 import ForecastCorner from "../components/ForecastCorner";
 import Umbrella from "../components/Umbrella";
 import AboutCorner from "../components/AboutCorner";
+import LocationCorner from "../components/LocationCorner";
 
 // API used: 7timer
 function Main() {
@@ -12,6 +13,8 @@ function Main() {
   const [date, setDate] = useState(new Date());
   // State to check if dataset might be outdated.
   const [outdated, setOutdated] = useState(false);
+  // State to store cooridnates.
+  const [coords, setCoords] = useState([103.8, 1.4]);
 
   // GET method specific to 7timer API.
   async function getData() {
@@ -19,7 +22,7 @@ function Main() {
       // 7timer's init is in UTC time.
       // const res = await fetch("/weather-test-clear.json");
       const res = await fetch(
-        "https://www.7timer.info/bin/api.pl?lon=103.8&lat=1.4&product=civil&output=json"
+        `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=civil&output=json`
       );
       if (res.status === 200) {
         const weatherData = await res.json();
@@ -104,6 +107,7 @@ function Main() {
       <AstroCorner raining={checkRain()} />
       <AboutCorner />
       <ForecastCorner data={data} date={date} />
+      <LocationCorner setCoords={setCoords} />
       <Umbrella
         raining={checkRain()}
         data={data}
