@@ -14,7 +14,7 @@ function Main() {
   // State to check if dataset might be outdated.
   const [outdated, setOutdated] = useState(false);
   // State to store cooridnates.
-  const [coords, setCoords] = useState([103.8, 1.4]);
+  const [coords, setCoords] = useState([103.82, 1.352]);
 
   // GET method specific to 7timer API.
   async function getData() {
@@ -77,12 +77,6 @@ function Main() {
         return item.prec_type;
       }
     );
-    console.log("Timepoint: " + timePoint);
-    console.log(weather12Hr);
-    console.log(
-      (currTime.getDate() - date.getDate()) * 24 +
-        (currTime.getHours() - date.getHours())
-    );
     if (
       weather12Hr.length === 0 ||
       (currTime.getDate() - date.getDate()) * 24 +
@@ -107,7 +101,7 @@ function Main() {
       <AstroCorner raining={checkRain()} />
       <AboutCorner />
       <ForecastCorner data={data} date={date} />
-      <LocationCorner setCoords={setCoords} />
+      <LocationCorner setCoords={setCoords} coords={coords} />
       <Umbrella
         raining={checkRain()}
         data={data}

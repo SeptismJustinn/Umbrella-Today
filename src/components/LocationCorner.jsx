@@ -15,6 +15,7 @@ function LocationCorner(props) {
         Location:
         <br />
         Singapore {currLocation}
+        <br />({props.coords[0]} , {props.coords[1]})
       </div>
       {showLocation && (
         <LocationModal

@@ -6,30 +6,56 @@ function Overlay(props) {
   function adjustCoords() {
     const coordArr = [0, 0];
     switch (props.currLocation) {
+      case "Current":
+        navigator.geolocation.getCurrentPosition(
+          (info) => {
+            let lon = Math.round(info.coords.longitude * 1000) / 1000;
+            let lat = Math.round(info.coords.latitude * 1000) / 1000;
+            coordArr[0] = lon;
+            coordArr[1] = lat;
+            props.setCoords(coordArr);
+          },
+          () => {
+            alert("Error getting current coordinates...");
+          }
+        );
+        break;
       case "Central":
-        coordArr[0] = 103.8;
-        // Technically 1.35 but API only accepts 1 d.p.
-        coordArr[1] = 1.4;
+        // Upper Peirce reservoir.
+        coordArr[0] = 103.82;
+        coordArr[1] = 1.352;
+        props.setCoords(coordArr);
+
         break;
       case "North":
-        coordArr[0] = 103.8;
-        // Lat 1.4+ but rounded down to 1.4.
-        coordArr[1] = 1.4;
+        // Sembawang MRT.
+        coordArr[0] = 103.82;
+        coordArr[1] = 1.449;
+        props.setCoords(coordArr);
+
         break;
       case "East":
-        coordArr[0] = 103.9;
-        coordArr[1] = 1.4;
+        // Tampines East MRT.
+        coordArr[0] = 103.955;
+        coordArr[1] = 1.356;
+        props.setCoords(coordArr);
+
         break;
       case "South":
-        coordArr[0] = 103.8;
-        coordArr[1] = 1.3;
+        // SGH.
+        coordArr[0] = 103.836;
+        coordArr[1] = 1.28;
+        props.setCoords(coordArr);
+
         break;
       case "West":
-        coordArr[0] = 103.7;
-        coordArr[1] = 1.4;
+        // NTU.
+        coordArr[0] = 103.683;
+        coordArr[1] = 1.351;
+        props.setCoords(coordArr);
+
         break;
     }
-    props.setCoords(coordArr);
   }
 
   return (
@@ -38,6 +64,19 @@ function Overlay(props) {
         <h2>Choose Singapore region:</h2>
         <br />
         <form className="row">
+          <div className="col-md-4">
+            <label>
+              <input
+                type="radio"
+                value="Current"
+                checked={props.currLocation === "Current"}
+                onChange={(event) => {
+                  props.setCurrLocation(event.target.value);
+                }}
+              />
+              Current
+            </label>
+          </div>
           <div className="col-md-4">
             <label>
               <input
