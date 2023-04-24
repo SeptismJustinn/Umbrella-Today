@@ -17,10 +17,10 @@ function Main() {
   async function getData() {
     try {
       // 7timer's init is in UTC time.
-      const res = await fetch("/weather-test-clear.json");
-      // const res = await fetch(
-      //   "https://www.7timer.info/bin/api.pl?lon=103.8&lat=1.4&product=civil&output=json"
-      // );
+      // const res = await fetch("/weather-test-clear.json");
+      const res = await fetch(
+        "https://www.7timer.info/bin/api.pl?lon=103.8&lat=1.4&product=civil&output=json"
+      );
       if (res.status === 200) {
         const weatherData = await res.json();
         // Clean data:
@@ -39,9 +39,11 @@ function Main() {
         setData(weatherData.dataseries.slice(0, 17));
         if (
           (new Date().getDate() - currDate.getDate()) * 24 +
-          new Date().getHours() -
-          currDate.getHours()
+            new Date().getHours() -
+            currDate.getHours() >
+          24
         ) {
+          // Check if it has been more than 24 hours since initialization
           setOutdated(true);
         } else {
           setOutdated(false);
