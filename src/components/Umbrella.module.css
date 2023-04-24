@@ -1,0 +1,14 @@
+.centered {
+  display: flex;
+  flex-direction: column;
+}
+
+.centered a {
+  margin: 0 auto;
+}
+
+.centered div {
+  text-align: center;
+  font-size: 60px;
+  color: aliceblue;
+}

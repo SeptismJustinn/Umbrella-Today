@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styles from "./Umbrella.module.css";
 
 function Umbrella(props) {
   function displayImage() {
@@ -16,7 +17,13 @@ function Umbrella(props) {
 
   function displayMessage() {
     if (props.outdated) {
-      return "Problems with database... Bring your umbrella just in case!";
+      return (
+        <>
+          Problems with database...
+          <br />
+          Bring your umbrella just in case!
+        </>
+      );
     } else {
       if (props.raining) {
         return "Bring your umbrella along!";
@@ -27,11 +34,11 @@ function Umbrella(props) {
   }
 
   return (
-    <div className="container">
+    <div className={`${styles.centered}`}>
       <NavLink to="/forecast" state={{ data: props.data, date: props.date }}>
         {displayImage()}
       </NavLink>
-      <div className="row">{displayMessage()}</div>
+      <div>{displayMessage()}</div>
     </div>
   );
 }
