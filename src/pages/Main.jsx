@@ -97,7 +97,7 @@ function Main() {
 
   return (
     <>
-      <AstroCorner raining={checkRain()} />
+      <AstroCorner raining={checkRain()} coords={coords} />
       <AboutCorner />
       <ForecastCorner data={data} date={date} />
       <LocationCorner setCoords={setCoords} coords={coords} getData={getData} />

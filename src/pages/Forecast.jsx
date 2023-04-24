@@ -6,6 +6,7 @@ import HourlyForecast from "../components/HourlyForecast";
 
 function Forecast() {
   const location = useLocation();
+  // If linkProps === null, redirect to main page to fetch data again.
   const linkProps = location.state;
   const hour = linkProps.date.getHours() % 24;
   return (
