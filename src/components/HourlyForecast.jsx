@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./HourlyForecast.module.css";
 
 function HourlyForecast(props) {
+  // Average rainfall mm/hr
   const precipitationRates = [
     "Negligible",
     "0-0.25",
@@ -13,6 +14,7 @@ function HourlyForecast(props) {
     "50-75",
     ">75",
   ];
+  // Average cloud cover
   const cloudiness = [
     ,
     "0%-6%",
@@ -25,11 +27,16 @@ function HourlyForecast(props) {
     "81%-94%",
     "94%-100%",
   ];
+
+  // Function takes in "weather" string from data set and converts it into human readable string.
   function decipherWeather(datasetString) {
     let string = datasetString;
     let output;
+    // Check if unique prefix was identified.
     let switchFlag = true;
+    // Check if thunderstorm reported.
     let thunderFlag = false;
+    // Handle unique prefixes p, m, o, i, t
     switch (string.charAt(0)) {
       case "p":
         output = "Partially cloudy skies";
@@ -44,12 +51,14 @@ function HourlyForecast(props) {
         output = "Isolated showers";
         break;
       case "t":
+        // Thunderstorm unique in that it is prefixed by "ts" instead of just "t"
         thunderFlag = true;
         break;
       default:
         switchFlag = false;
     }
     if (thunderFlag) {
+      // If "t" prefix identified, string[2] onwards deterimines if likely storm.
       if (string.substring(2, 6) === "rain") {
         return "Thunderstorm";
       } else {
@@ -58,6 +67,7 @@ function HourlyForecast(props) {
     } else if (switchFlag) {
       return output;
     } else {
+      // If no prefix, first 4 chars gives sufficiently unique cases.
       string = string.substring(0, 4);
     }
     switch (string) {

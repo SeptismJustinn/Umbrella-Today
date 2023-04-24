@@ -4,10 +4,14 @@ import ForecastCorner from "../components/ForecastCorner";
 import Umbrella from "../components/Umbrella";
 import DisclaimerCorner from "../components/DisclaimerCorner";
 
+// API used: 7timer
 function Main() {
+  // State to contain fetched data.
   const [data, setData] = useState([]);
+  // State to contain the date at which data was initialized.
   const [date, setDate] = useState(new Date());
 
+  // GET method specific to 7timer API.
   async function getData() {
     try {
       // 7timer's init is in UTC time.
@@ -39,8 +43,17 @@ function Main() {
     }
   }
 
+  // Function to check if there will be rain in the next ~12hrs from rounded up hour at which component rendered.
   function checkRain() {
-    return false;
+    const currTime = new Date();
+    const currHour = currTime.getHours() + (currTime.getMinutes() > 30 ? 1 : 0);
+    const timePoint = Math.floor((currHour - date.getHours()) / 3);
+    const weather12Hr = [...data.slice(timePoint, timePoint + 4)].map(
+      (item) => {
+        return item.prec_type;
+      }
+    );
+    return weather12Hr.includes("rain");
   }
 
   useEffect(() => {
