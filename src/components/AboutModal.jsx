@@ -12,6 +12,12 @@ function Overlay(props) {
         </a>{" "}
         CIVIL and ASTRO APIs.
         <br />
+        Images used drawn by Mifune Takashi,{" "}
+        <a href="https://www.irasutoya.com/" target="_blank">
+          みふねたかし
+        </a>
+        .
+        <br />
         <br />
         Umbrella recommendation is made regardless of volume of rainfall. Should
         any instance of rain be predicted up to 12 hours from time of launching

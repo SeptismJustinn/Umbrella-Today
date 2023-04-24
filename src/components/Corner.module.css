@@ -6,8 +6,8 @@
 
 .topLeft {
   position: fixed;
-  left: 2vw;
-  top: 2vh;
+  left: -8vh;
+  top: -8vh;
 }
 .botRight {
   position: fixed;

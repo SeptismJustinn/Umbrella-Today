@@ -13,7 +13,7 @@ function AboutCorner() {
       >
         About
       </div>
-      {showDisclaimer && <AboutModal setShowAbout={setShowAbout} />}
+      {showAbout && <AboutModal setShowAbout={setShowAbout} />}
     </>
   );
 }
