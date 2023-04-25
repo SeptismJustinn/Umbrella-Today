@@ -121,3 +121,6 @@ yarn-debug.log*
 
 .idea/
 .vscode/
+
+# Ignore testdata folder
+/public/testdata/
