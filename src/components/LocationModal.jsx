@@ -76,6 +76,7 @@ function Overlay(props) {
       return latRef.current.focus();
     } else {
       adjustCoords();
+      props.setLoading(true);
       props.getData();
       props.setShowLocation(false);
     }
@@ -235,6 +236,7 @@ function LocationModal(props) {
       setCurrLocation={props.setCurrLocation}
       setShowLocation={props.setShowLocation}
       getData={props.getData}
+      setLoading={props.setLoading}
     />,
     document.querySelector("#modal-root")
   );

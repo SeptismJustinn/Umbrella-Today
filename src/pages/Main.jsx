@@ -15,6 +15,8 @@ function Main() {
   const [outdated, setOutdated] = useState(false);
   // State to store cooridnates.
   const [coords, setCoords] = useState([103.82, 1.352]);
+  // State to check if dataset is loaded.
+  const [loading, setLoading] = useState(!data[0]);
 
   // GET method specific to 7timer API.
   async function getData() {
@@ -40,6 +42,7 @@ function Main() {
         setDate(currDate);
         // Obtain next 48 hour's data.
         setData(weatherData.dataseries.slice(0, 17));
+        setLoading(false);
         if (
           (new Date().getDate() - currDate.getDate()) * 24 +
             new Date().getHours() -
@@ -100,13 +103,19 @@ function Main() {
       <AstroCorner raining={checkRain()} coords={coords} />
       <AboutCorner />
       <ForecastCorner data={data} date={date} coords={coords} />
-      <LocationCorner setCoords={setCoords} coords={coords} getData={getData} />
+      <LocationCorner
+        setCoords={setCoords}
+        coords={coords}
+        getData={getData}
+        setLoading={setLoading}
+      />
       <Umbrella
         raining={checkRain()}
         data={data}
         date={date}
         coords={coords}
         outdated={outdated}
+        loading={loading}
       />
     </>
   );

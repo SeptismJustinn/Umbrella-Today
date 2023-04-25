@@ -1,10 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Umbrella.module.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Umbrella(props) {
   function displayImage() {
-    if (props.outdated) {
+    if (props.loading) {
+      return <CircularProgress size="70vh" />;
+    } else if (props.outdated) {
       return <img src="/umbrella_error.png" alt="Outdated dataset" />;
     } else {
       if (props.raining) {
@@ -16,7 +19,9 @@ function Umbrella(props) {
   }
 
   function displayMessage() {
-    if (props.outdated) {
+    if (props.loading) {
+      return;
+    } else if (props.outdated) {
       return (
         <>
           Problems with database...

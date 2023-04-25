@@ -19,6 +19,7 @@ function LocationCorner(props) {
           : "Singapore " + currLocation}
         <br />({props.coords[0]} , {props.coords[1]})
       </div>
+
       {showLocation && (
         <LocationModal
           setCoords={props.setCoords}
@@ -27,6 +28,7 @@ function LocationCorner(props) {
           setCurrLocation={setCurrLocation}
           setShowLocation={setShowLocation}
           getData={props.getData}
+          setLoading={props.setLoading}
         />
       )}
     </>
