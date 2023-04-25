@@ -29,3 +29,7 @@
   padding: 50px;
   border-radius: 50px;
 }
+
+form div {
+  padding: 2px 0;
+}

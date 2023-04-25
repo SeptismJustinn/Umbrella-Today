@@ -14,12 +14,15 @@ function LocationCorner(props) {
       >
         Location:
         <br />
-        Singapore {currLocation}
+        {currLocation === "Custom" || currLocation === "Current"
+          ? "Custom"
+          : "Singapore " + currLocation}
         <br />({props.coords[0]} , {props.coords[1]})
       </div>
       {showLocation && (
         <LocationModal
           setCoords={props.setCoords}
+          coords={props.coords}
           currLocation={currLocation}
           setCurrLocation={setCurrLocation}
           setShowLocation={setShowLocation}
