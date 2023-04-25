@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./PageText.module.css";
 import HourlyAstronomy from "../components/HourlyAstronomy";
-import { Switch, Grid } from "@mui/material";
+import { Switch, Grid, CircularProgress } from "@mui/material";
 
 function Astronomy() {
   const [sgTime, setSgTime] = useState(true);
   const [data, setData] = useState([]);
   const [date, setDate] = useState(new Date());
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   // Coordinates to query API. Default to SG Central if state did not get propped properly (e.g. directly accessing /astronomy)
   const coords = location.state.coords || [103.82, 1.352];
@@ -89,23 +90,27 @@ function Astronomy() {
             <div className="col-md-2">Temperature</div>
             <div className="col-md-1">Humidity</div>
           </h5>
-          {data.map((item, idx) => {
-            return (
-              <HourlyAstronomy
-                key={idx}
-                id={idx}
-                time={(hour + item.timepoint) % 24}
-                nextDay={item.timepoint >= 24 - hour ? true : false}
-                thirdDay={item.timepoint >= 48 - hour ? true : false}
-                prec={item.prec_type}
-                cloud={item.cloudcover}
-                seeing={item.seeing}
-                transparency={item.transparency}
-                temp={item.temp2m}
-                humidity={item.rh2m}
-              />
-            );
-          })}
+          {data[0] ? (
+            data.map((item, idx) => {
+              return (
+                <HourlyAstronomy
+                  key={idx}
+                  id={idx}
+                  time={(hour + item.timepoint) % 24}
+                  nextDay={item.timepoint >= 24 - hour ? true : false}
+                  thirdDay={item.timepoint >= 48 - hour ? true : false}
+                  prec={item.prec_type}
+                  cloud={item.cloudcover}
+                  seeing={item.seeing}
+                  transparency={item.transparency}
+                  temp={item.temp2m}
+                  humidity={item.rh2m}
+                />
+              );
+            })
+          ) : (
+            <CircularProgress size="20vh" />
+          )}
         </div>
       </div>
     </>
