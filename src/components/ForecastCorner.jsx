@@ -7,6 +7,12 @@ function ForecastCorner(props) {
     <NavLink
       to="/forecast"
       state={{ data: props.data, date: props.date, coords: props.coords }}
+      onClick={(event) => {
+        if (props.loading) {
+          // Prevent navigation if still loading data.
+          event.preventDefault();
+        }
+      }}
     >
       <div className={`${cornerStyle.botRight} ${cornerStyle.click}`}>
         Detailed Forecast

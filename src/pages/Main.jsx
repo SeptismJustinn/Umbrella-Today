@@ -103,7 +103,12 @@ function Main() {
     <>
       <AstroCorner raining={checkRain()} coords={coords} />
       <AboutCorner />
-      <ForecastCorner data={data} date={date} coords={coords} />
+      <ForecastCorner
+        data={data}
+        date={date}
+        coords={coords}
+        loading={loading}
+      />
       <LocationCorner
         setCoords={setCoords}
         coords={coords}
