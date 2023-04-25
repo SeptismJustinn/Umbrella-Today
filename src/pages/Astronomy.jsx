@@ -2,21 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./PageText.module.css";
 import HourlyAstronomy from "../components/HourlyAstronomy";
+import { Switch, Grid } from "@mui/material";
 
 function Astronomy() {
+  const [sgTime, setSgTime] = useState(true);
   const [data, setData] = useState([]);
   const [date, setDate] = useState(new Date());
   const location = useLocation();
   // Coordinates to query API. Default to SG Central if state did not get propped properly (e.g. directly accessing /astronomy)
   const coords = location.state.coords || [103.82, 1.352];
-  const hour = date.getHours() % 24;
+  const hour = (sgTime ? date.getHours() : date.getUTCHours()) % 24;
 
   async function getAstro() {
     try {
-      const res = await fetch("/testdata/astro-test.json");
-      // const res = await fetch(
-      //   `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=astro&output=json`
-      // );
+      // const res = await fetch("/testdata/astro-test.json");
+      const res = await fetch(
+        `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=astro&output=json`
+      );
       if (res.status === 200) {
         const dat = await res.json();
         // Clean data:
@@ -48,11 +50,31 @@ function Astronomy() {
   return (
     <>
       <div className={styles.forecastText}>
+        <Grid component="label" container alignItems="center" spacing={1}>
+          <Grid item>GMT Time</Grid>
+          <Grid item>
+            <Switch
+              defaultChecked
+              onChange={(event) => {
+                setSgTime(event.target.checked);
+              }}
+            />
+          </Grid>
+          <Grid item>Singapore Time (GMT+8)</Grid>
+        </Grid>
         <div className="row">
-          <h2 className="col-md-8">
-            Forecast as at {date.getDate()}/{date.getMonth() + 1},{" "}
-            {hour < 10 ? "0" + hour : hour}00Hrs
-          </h2>
+          {sgTime && (
+            <h2 className="col-md-8">
+              Forecast as at {date.getDate()}/{date.getMonth() + 1},{" "}
+              {hour < 10 ? "0" + hour : hour}00Hrs
+            </h2>
+          )}
+          {!sgTime && (
+            <h2 className="col-md-8">
+              Forecast as at {date.getUTCDate()}/{date.getUTCMonth() + 1},{" "}
+              {hour < 10 ? "0" + hour : hour}00Hrs
+            </h2>
+          )}
           <div className="col-md-4 text-end">
             Coordinates: ({`${coords[0]}, ${coords[1]}`})
           </div>

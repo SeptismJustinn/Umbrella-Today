@@ -1,24 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, Navigate } from "react-router-dom";
 import styles from "./PageText.module.css";
 import bgStyles from "../components/HourlyForecast.module.css";
 import HourlyForecast from "../components/HourlyForecast";
+import { Switch, Grid } from "@mui/material";
 
 function Forecast() {
+  const [sgTime, setSgTime] = useState(true);
   const location = useLocation();
   // If linkProps === null, redirect to main page to fetch data again.
   const linkProps = location.state;
-  const hour = linkProps.date.getHours() % 24;
+  const hour =
+    (sgTime ? linkProps.date.getHours() : linkProps.date.getUTCHours()) % 24;
   return (
     <>
       {!linkProps && <Navigate replace to="/" />}
       <div className={styles.forecastText}>
+        <Grid component="label" container alignItems="center" spacing={1}>
+          <Grid item>GMT Time</Grid>
+          <Grid item>
+            <Switch
+              defaultChecked
+              onChange={(event) => {
+                setSgTime(event.target.checked);
+              }}
+            />
+          </Grid>
+          <Grid item>Singapore Time (GMT+8)</Grid>
+        </Grid>
         <div className="row">
-          <h2 className="col-md-8">
-            Forecast as at {linkProps.date.getDate()}/
-            {linkProps.date.getMonth() + 1}, {hour < 10 ? "0" + hour : hour}
-            00Hrs
-          </h2>
+          {sgTime && (
+            <h2 className="col-md-8">
+              Forecast as at {linkProps.date.getDate()}/
+              {linkProps.date.getMonth() + 1}, {hour < 10 ? "0" + hour : hour}
+              00Hrs
+            </h2>
+          )}
+          {!sgTime && (
+            <h2 className="col-md-8">
+              Forecast as at {linkProps.date.getUTCDate()}/
+              {linkProps.date.getUTCMonth() + 1},{" "}
+              {hour < 10 ? "0" + hour : hour}
+              00Hrs
+            </h2>
+          )}
           <div className="col-md-4 text-end">
             Coordinates: ({`${linkProps.coords[0]}, ${linkProps.coords[1]}`})
           </div>
