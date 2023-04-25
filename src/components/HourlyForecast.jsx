@@ -99,6 +99,28 @@ function HourlyForecast(props) {
     return output;
   }
 
+  function decipherPrecipitation(datasetString) {
+    let output = "";
+    switch (datasetString) {
+      case "rain":
+        output = "Rain";
+        break;
+      case "none":
+        output = "No precipitation";
+        break;
+      case "snow":
+        output = "Snow";
+        break;
+      case "icep":
+        output = "Ice pellets";
+        break;
+      case "frzr":
+        output = "Freezing rain";
+        break;
+    }
+    return output;
+  }
+
   return (
     <div
       className={`row ${
@@ -110,7 +132,8 @@ function HourlyForecast(props) {
           ? (props.time || 12) + "AM"
           : (props.time % 12 || 12) + "PM"}
       </div>
-      <div className="col-md-3">{decipherWeather(props.forecast)}</div>
+      <div className="col-md-2">{decipherWeather(props.forecast)}</div>
+      <div className="col-md-2">{decipherPrecipitation(props.precType)}</div>
       <div className="col-md-2">
         {precipitationRates[props.prec] + (props.prec === 0 ? "" : "mm/hr")}
       </div>
@@ -118,7 +141,7 @@ function HourlyForecast(props) {
         {props.temp}
         <span>&#8451;</span>
       </div>
-      <div className="col-md-2">{props.humidity}</div>
+      <div className="col-md-1">{props.humidity}</div>
       <div className="col-md-2">{cloudiness[props.cloudcover]}</div>
     </div>
   );

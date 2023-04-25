@@ -4,3 +4,7 @@
   border-radius: 20px;
   background-color: aliceblue;
 }
+
+.boldText {
+  font-weight: bold;
+}

@@ -28,33 +28,28 @@ function Forecast() {
           </Grid>
           <Grid item>Singapore Time (GMT+8)</Grid>
         </Grid>
-        <div className="row">
-          {sgTime && (
-            <h2 className="col-md-8">
-              Forecast as at {linkProps.date.getDate()}/
-              {linkProps.date.getMonth() + 1}, {hour < 10 ? "0" + hour : hour}
-              00Hrs
-            </h2>
-          )}
-          {!sgTime && (
-            <h2 className="col-md-8">
-              Forecast as at {linkProps.date.getUTCDate()}/
-              {linkProps.date.getUTCMonth() + 1},{" "}
-              {hour < 10 ? "0" + hour : hour}
-              00Hrs
-            </h2>
-          )}
-          <div className="col-md-4 text-end">
-            Coordinates: ({`${linkProps.coords[0]}, ${linkProps.coords[1]}`})
-          </div>
-        </div>
+        {sgTime && (
+          <h2>
+            Forecast as at {linkProps.date.getDate()}/
+            {linkProps.date.getMonth() + 1}, {hour < 10 ? "0" + hour : hour}
+            00Hrs @ Lon: {linkProps.coords[0]}, Lat: {linkProps.coords[1]}
+          </h2>
+        )}
+        {!sgTime && (
+          <h2>
+            Forecast as at {linkProps.date.getUTCDate()}/
+            {linkProps.date.getUTCMonth() + 1}, {hour < 10 ? "0" + hour : hour}
+            00Hrs @ Lon: {linkProps.coords[0]}, Lat: {linkProps.coords[1]}
+          </h2>
+        )}
         <div className="container">
           <h5 className="row">
             <div className="col-md-1">Time</div>
-            <div className="col-md-3">Forecast</div>
-            <div className="col-md-2">Average Rainfall</div>
+            <div className="col-md-2">Forecast</div>
+            <div className="col-md-2">Precipitation</div>
+            <div className="col-md-2">Precipitation Rate</div>
             <div className="col-md-2">Temperature</div>
-            <div className="col-md-2">Humidity</div>
+            <div className="col-md-1">Humidity</div>
             <div className="col-md-2">Cloudiness</div>
           </h5>
 
@@ -67,6 +62,7 @@ function Forecast() {
                 nextDay={item.timepoint >= 24 - hour ? true : false}
                 thirdDay={item.timepoint >= 48 - hour ? true : false}
                 forecast={item.weather}
+                precType={item.prec_type}
                 prec={item.prec_amount}
                 temp={item.temp2m}
                 humidity={item.rh2m}
@@ -77,14 +73,53 @@ function Forecast() {
         </div>
       </div>
       <div className={styles.forecastText}>
-        Each forecast is made over a 3-hour time period and takes into account
-        several factors to decide weather. <br />
-        The forecasts displayed are over the next 48 hours, with{" "}
-        <span className={bgStyles.next_day}>next day forecasts</span> and{" "}
-        <span className={bgStyles.third_day}>third day forecasts</span>.<br />
-        Negligible rainfall does not rule out possible rainfall entirely. When
-        average rainfall is less than 4mm/hr, light showers may still be
-        expected, especially when cloudiness is greater than 20%. <br />
+        <h4>Parameters</h4>
+        <ul>
+          <li>
+            <h6>Time</h6>
+            Each forecast is made over 3-hour time periods for the next 48
+            hours, with{" "}
+            <span className={bgStyles.next_day}>
+              next day forecasts
+            </span> and{" "}
+            <span className={bgStyles.third_day}>third day forecasts</span>.
+          </li>
+          <li>
+            <h6>Forecast</h6>
+            Forecast takes into account all parameters to give a general
+            prediction of the average weather conditions over the 3 hours.
+          </li>
+          <li>
+            <h6>Precipitation</h6>
+            Describes what type of precipitation is to be expected over the 3
+            hours.
+          </li>
+          <li>
+            <h6>Precipitation Rate</h6>
+            Average volume of precipitation expected per hour over the time
+            period. <br />
+          </li>
+          <li>
+            <h6>Temperature</h6>
+            Expected temperature up to 2 meters from Earth's surface.
+          </li>
+          <li>
+            <h6>Humidity</h6>
+            Relative humidity up to 2 meters from Earth's surface.
+          </li>
+          <li>
+            <h6>Cloudiness</h6>
+            Percentage of sky covered by clouds. Accounts for all cloud layers
+            together.
+          </li>
+        </ul>
+        <span className={styles.boldText}>Note:</span> In cases where
+        preciptation and rates do not tally (e.g. 0-0.25mm/hr of no
+        precipitation), it may be due to the fact that precipitation is only
+        expected to occur for short periods of the 3 hours for which the
+        forecast was made, leading to some volume of precipitation predicted but
+        no precipitation identified, or precipitation being forecast with
+        negligible volume.
       </div>
     </>
   );

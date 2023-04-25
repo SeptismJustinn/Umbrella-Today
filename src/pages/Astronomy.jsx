@@ -70,23 +70,20 @@ function Astronomy() {
           </Grid>
           <Grid item>Singapore Time (GMT+8)</Grid>
         </Grid>
-        <div className="row">
-          {sgTime && (
-            <h2 className="col-md-8">
-              Forecast as at {date.getDate()}/{date.getMonth() + 1},{" "}
-              {hour < 10 ? "0" + hour : hour}00Hrs
-            </h2>
-          )}
-          {!sgTime && (
-            <h2 className="col-md-8">
-              Forecast as at {date.getUTCDate()}/{date.getUTCMonth() + 1},{" "}
-              {hour < 10 ? "0" + hour : hour}00Hrs
-            </h2>
-          )}
-          <div className="col-md-4 text-end">
-            Coordinates: ({`${coords[0]}, ${coords[1]}`})
-          </div>
-        </div>
+        {sgTime && (
+          <h2>
+            Forecast as at {date.getDate()}/{date.getMonth() + 1},{" "}
+            {hour < 10 ? "0" + hour : hour}00Hrs @ Lon: {coords[0]}, Lat:{" "}
+            {coords[1]}
+          </h2>
+        )}
+        {!sgTime && (
+          <h2>
+            Forecast as at {date.getUTCDate()}/{date.getUTCMonth() + 1},{" "}
+            {hour < 10 ? "0" + hour : hour}00Hrs @ Lon: {coords[0]}, Lat:{" "}
+            {coords[1]}
+          </h2>
+        )}
         <div className="container">
           <h5 className="row">
             <div className="col-md-1">Time</div>
