@@ -35,7 +35,10 @@ function Umbrella(props) {
 
   return (
     <div className={`${styles.centered}`}>
-      <NavLink to="/forecast" state={{ data: props.data, date: props.date }}>
+      <NavLink
+        to="/forecast"
+        state={{ data: props.data, date: props.date, coords: props.coords }}
+      >
         {displayImage()}
       </NavLink>
       <div>{displayMessage()}</div>

@@ -4,7 +4,10 @@ import cornerStyle from "./Corner.module.css";
 
 function ForecastCorner(props) {
   return (
-    <NavLink to="/forecast" state={{ data: props.data, date: props.date }}>
+    <NavLink
+      to="/forecast"
+      state={{ data: props.data, date: props.date, coords: props.coords }}
+    >
       <div className={`${cornerStyle.botRight} ${cornerStyle.click}`}>
         Detailed Forecast
       </div>

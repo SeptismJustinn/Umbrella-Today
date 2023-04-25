@@ -48,10 +48,15 @@ function Astronomy() {
   return (
     <>
       <div className={styles.forecastText}>
-        <h2>
-          Forecast as at {date.getDate()}/{date.getMonth() + 1},{" "}
-          {hour < 10 ? "0" + hour : hour}00Hrs
-        </h2>
+        <div className="row">
+          <h2 className="col-md-8">
+            Forecast as at {date.getDate()}/{date.getMonth() + 1},{" "}
+            {hour < 10 ? "0" + hour : hour}00Hrs
+          </h2>
+          <div className="col-md-4 text-end">
+            Coordinates: ({`${coords[0]}, ${coords[1]}`})
+          </div>
+        </div>
         <div className="container">
           <h5 className="row">
             <div className="col-md-1">Time</div>

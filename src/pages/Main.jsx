@@ -99,12 +99,13 @@ function Main() {
     <>
       <AstroCorner raining={checkRain()} coords={coords} />
       <AboutCorner />
-      <ForecastCorner data={data} date={date} />
+      <ForecastCorner data={data} date={date} coords={coords} />
       <LocationCorner setCoords={setCoords} coords={coords} getData={getData} />
       <Umbrella
         raining={checkRain()}
         data={data}
         date={date}
+        coords={coords}
         outdated={outdated}
       />
     </>
