@@ -5,13 +5,16 @@ import HourlyAstronomy from "../components/HourlyAstronomy";
 import { Switch, Grid, CircularProgress } from "@mui/material";
 
 function Astronomy() {
+  // State to check if switch is toggled to sgTime or UTC time.
   const [sgTime, setSgTime] = useState(true);
+  // State to store ASTRO data from 7Timer.
   const [data, setData] = useState([]);
+  // State to store date of data initialization (default is system time)
   const [date, setDate] = useState(new Date());
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
   // Coordinates to query API. Default to SG Central if state did not get propped properly (e.g. directly accessing /astronomy)
-  const coords = location.state.coords || [103.82, 1.352];
+  const coords = location.state?.coords || [103.82, 1.352];
+  // Current hour in SGT/UTC
   const hour = (sgTime ? date.getHours() : date.getUTCHours()) % 24;
 
   async function getAstro() {
@@ -48,6 +51,10 @@ function Astronomy() {
     getAstro();
   }, []);
 
+  /*
+  Displays time in SGT/UTC according to switch state.
+  Conditionally renders loading spinner when data not loaded, data presented otherwise
+  */
   return (
     <>
       <div className={styles.forecastText}>
@@ -113,6 +120,7 @@ function Astronomy() {
           )}
         </div>
       </div>
+      <div className={styles.forecastText}></div>
     </>
   );
 }
