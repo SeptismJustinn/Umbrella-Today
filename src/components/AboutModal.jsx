@@ -22,7 +22,11 @@ function Overlay(props) {
         in order to obtain more accurate forecasts.
         <br />
         <br />
-        Umbrella recommendation is made regardless of volume of rainfall.
+        Umbrella recommendation as long as precipitation in any form is
+        expected.
+        <br />
+        App was designed in Singapore's context and as such, caters primarily to
+        GMT +8 timezones.
         <br />
         Should any instance of rain be predicted up to 12 hours from time of
         launching app, umbrella would be recommended.
