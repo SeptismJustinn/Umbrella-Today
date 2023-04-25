@@ -4,31 +4,39 @@ import styles from "./Modal.module.css";
 import LocationCustomField from "./LocationCustomField";
 
 function Overlay(props) {
+  // State to toggle custom coordinate input fields
   const [showCustomField, setShowCustomField] = useState(
     props.currLocation === "Custom"
   );
+  // States to store coordinates entered into input fields
   const [customLong, setCustomLong] = useState(props.coords[0]);
   const [customLat, setCustomLat] = useState(props.coords[1]);
+  // States to track if invalid values are entered into input fields.
   const [longErr, setLongErr] = useState(false);
   const [latErr, setLatErr] = useState(false);
+  // Refs to allow for focusing onto input fields.
   const longRef = useRef();
   const latRef = useRef();
 
+  // Function to lift coordinates to Main
   function adjustCoords() {
     const coordArr = [0, 0];
     switch (props.currLocation) {
       case "Custom":
+        // Extract custom coordinates from input fields.
         coordArr[0] = Math.round(customLong * 1000) / 1000;
         coordArr[1] = Math.round(customLat * 1000) / 1000;
         props.setCoords(coordArr);
         break;
       case "Current":
+        // Utilize system location's coordinates.
         navigator.geolocation.getCurrentPosition(
           (info) => {
             let lon = Math.round(info.coords.longitude * 1000) / 1000;
             let lat = Math.round(info.coords.latitude * 1000) / 1000;
             coordArr[0] = lon;
             coordArr[1] = lat;
+            // setCoords MUST be called within callback function here.
             props.setCoords(coordArr);
           },
           () => {
@@ -69,15 +77,19 @@ function Overlay(props) {
     }
   }
 
+  // Function to handle confirm button click.
   function handleConfirm() {
+    // Focus on erroneous fields.
     if (longErr) {
       return longRef.current.focus();
     } else if (latErr) {
       return latRef.current.focus();
     } else {
+      // Lift coords
       adjustCoords();
+      // Set umbrella image to load
       props.setLoading(true);
-      props.getData();
+      // Hide modal.
       props.setShowLocation(false);
     }
   }
@@ -235,7 +247,6 @@ function LocationModal(props) {
       currLocation={props.currLocation}
       setCurrLocation={props.setCurrLocation}
       setShowLocation={props.setShowLocation}
-      getData={props.getData}
       setLoading={props.setLoading}
     />,
     document.querySelector("#modal-root")

@@ -3,7 +3,9 @@ import cornerStyle from "./Corner.module.css";
 import LocationModal from "./LocationModal";
 
 function LocationCorner(props) {
+  // State to toggle modal display
   const [showLocation, setShowLocation] = useState(false);
+  // State to track current location to be displayed
   const [currLocation, setCurrLocation] = useState("Central");
 
   return (
@@ -27,7 +29,6 @@ function LocationCorner(props) {
           currLocation={currLocation}
           setCurrLocation={setCurrLocation}
           setShowLocation={setShowLocation}
-          getData={props.getData}
           setLoading={props.setLoading}
         />
       )}

@@ -90,13 +90,14 @@ function Main() {
       return true;
     } else {
       // Check if any rain predicted
-      return weather12Hr.includes("rain");
+      return !weather12Hr.includes("none");
     }
   }
 
+  // getData on mount, re-render and when coords is updated.
   useEffect(() => {
     getData();
-  }, []);
+  }, [coords]);
 
   return (
     <>
@@ -106,7 +107,6 @@ function Main() {
       <LocationCorner
         setCoords={setCoords}
         coords={coords}
-        getData={getData}
         setLoading={setLoading}
       />
       <Umbrella
