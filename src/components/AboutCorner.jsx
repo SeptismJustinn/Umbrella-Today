@@ -3,6 +3,7 @@ import cornerStyle from "./Corner.module.css";
 import AboutModal from "./AboutModal";
 
 function AboutCorner() {
+  // State to toggle modal display.
   const [showAbout, setShowAbout] = useState(false);
 
   return (

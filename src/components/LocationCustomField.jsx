@@ -1,8 +1,9 @@
 import React from "react";
-import { TextField } from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 import styles from "./LocationCustomField.module.css";
 
 function LocationCustomField(props) {
+  // Function to handle onChange for longitude input field.
   function handleLongChange(val) {
     if (!Number.isNaN(Number(val)) && val >= -180 && val <= 180) {
       props.setCustomLong(val);
@@ -12,7 +13,9 @@ function LocationCustomField(props) {
     }
   }
 
+  // Function to handle onChange for latitude input field.
   function handleLatChange(val) {
+    // Input validation -90 to 90 only
     if (!Number.isNaN(Number(val)) && val >= -90 && val <= 90) {
       props.setCustomLat(val);
       props.setLatErr(false);
@@ -33,6 +36,9 @@ function LocationCustomField(props) {
           onChange={(event) => handleLongChange(event.target.value)}
           helperText={props.longErr ? "Enter number between -180 and 180" : ""}
           inputRef={props.longRef}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">&deg;</InputAdornment>,
+          }}
         />
       </div>
       <div>
@@ -45,6 +51,9 @@ function LocationCustomField(props) {
           onChange={(event) => handleLatChange(event.target.value)}
           helperText={props.latErr ? "Enter number between -90 and 90" : ""}
           inputRef={props.latRef}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">&deg;</InputAdornment>,
+          }}
         />
       </div>
     </div>

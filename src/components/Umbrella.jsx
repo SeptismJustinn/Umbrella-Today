@@ -4,15 +4,20 @@ import styles from "./Umbrella.module.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Umbrella(props) {
+  // Function to determine what image to display
   function displayImage() {
     if (props.loading) {
+      // Loading spinner
       return <CircularProgress size="70vh" />;
     } else if (props.outdated) {
+      // Error if database outdated or failed to fetch properly
       return <img src="/umbrella_error.png" alt="Outdated dataset" />;
     } else {
       if (props.raining) {
+        // Open umbrella
         return <img src="/umbrella_open.png" />;
       } else {
+        // Closed umbrella
         return <img src="/umbrella_closed.png" />;
       }
     }
@@ -20,8 +25,10 @@ function Umbrella(props) {
 
   function displayMessage() {
     if (props.loading) {
+      // No message while loading
       return;
     } else if (props.outdated) {
+      // Contingency message if error/outdated
       return (
         <>
           Problems with database...
@@ -31,8 +38,10 @@ function Umbrella(props) {
       );
     } else {
       if (props.raining) {
+        // Raining
         return "Bring your umbrella along!";
       } else {
+        // No rain expected
         return "Leave your umbrella behind!";
       }
     }

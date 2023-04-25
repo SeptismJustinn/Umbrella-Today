@@ -68,24 +68,33 @@ function HourlyForecast(props) {
       return output;
     } else {
       // If no prefix, first 4 chars gives sufficiently unique cases.
-      string = string.substring(0, 4);
-    }
-    switch (string) {
-      case "clea":
-        output = "Clear skies";
-        break;
-      case "clou":
-        output = "Extremely cloudy";
-        break;
-      case "humi":
-        output = "Foggy";
-        break;
-      case "ligh":
-        output = "Light rain/showers";
-        break;
-      case "rain":
-        output = "Rain expected";
-        break;
+      const sub = string.substring(0, 4);
+      switch (sub) {
+        case "clea":
+          output = "Clear skies";
+          break;
+        case "clou":
+          output = "Extremely cloudy";
+          break;
+        case "humi":
+          output = "Foggy";
+          break;
+        case "ligh":
+          output = "Light rain/showers";
+          if (string.charAt(5) === "s") {
+            output = "Lightly snowing";
+          }
+          break;
+        case "rain":
+          output = "Rain expected";
+          if (string.charAt(4) === "s") {
+            output = "Rainy snow";
+          }
+          break;
+        case "snow":
+          output = "Snow expected";
+          break;
+      }
     }
     return output;
   }
