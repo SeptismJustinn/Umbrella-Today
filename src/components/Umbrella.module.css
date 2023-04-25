@@ -9,8 +9,13 @@
 
 .centered div {
   text-align: center;
-  font-size: 50px;
+  font-size: 3vw;
   color: aliceblue;
+}
+
+img {
+  max-width: 80vh;
+  max-height: 80vh;
 }
 
 .centered img {
