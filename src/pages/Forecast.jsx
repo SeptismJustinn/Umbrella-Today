@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import styles from "./Forecast.module.css";
+import styles from "./PageText.module.css";
 import bgStyles from "../components/HourlyForecast.module.css";
 import HourlyForecast from "../components/HourlyForecast";
 
@@ -33,8 +33,8 @@ function Forecast() {
                 key={idx}
                 id={idx}
                 time={(hour + item.timepoint) % 24}
-                nextDay={item.timepoint > 24 - hour ? true : false}
-                thirdDay={item.timepoint > 48 - hour ? true : false}
+                nextDay={item.timepoint >= 24 - hour ? true : false}
+                thirdDay={item.timepoint >= 48 - hour ? true : false}
                 forecast={item.weather}
                 prec={item.prec_amount}
                 temp={item.temp2m}
