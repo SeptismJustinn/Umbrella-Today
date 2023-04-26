@@ -6,6 +6,7 @@ function HourlyForecast(props) {
   const precipitationRates = [
     "Negligible",
     "0-0.25",
+    "0.25-1",
     "1-4",
     "4-10",
     "10-16",
