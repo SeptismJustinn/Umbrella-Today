@@ -121,5 +121,4 @@ yarn-debug.log*
 
 .idea/
 .vscode/
-public/testdata/*
-
+public/testdata/*.json
