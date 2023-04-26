@@ -48,9 +48,9 @@ function Forecast() {
             <div className="col-md-2">Forecast</div>
             <div className="col-md-2">Precipitation</div>
             <div className="col-md-2">Precipitation Rate</div>
+            <div className="col-md-2">Cloudiness</div>
             <div className="col-md-2">Temperature</div>
             <div className="col-md-1">Humidity</div>
-            <div className="col-md-2">Cloudiness</div>
           </h5>
 
           {linkProps.data.map((item, idx) => {

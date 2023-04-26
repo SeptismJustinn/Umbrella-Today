@@ -22,7 +22,7 @@ function Main() {
   async function getData() {
     try {
       // 7timer's init is in UTC time.
-      const res = await fetch("/testdata/weather-test-clear.json");
+      const res = await fetch("/testdata/weather-test.json");
       // const res = await fetch(
       //   `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=civil&output=json`
       // );

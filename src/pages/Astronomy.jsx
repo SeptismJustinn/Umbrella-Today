@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./PageText.module.css";
+import bgStyles from "../components/HourlyForecast.module.css";
 import HourlyAstronomy from "../components/HourlyAstronomy";
 import { Switch, Grid, CircularProgress } from "@mui/material";
 
@@ -89,10 +90,11 @@ function Astronomy() {
             <div className="col-md-1">Time</div>
             <div className="col-md-2">Precipitation</div>
             <div className="col-md-2">Cloud Cover</div>
-            <div className="col-md-2">Seeing</div>
             <div className="col-md-2">Transparency</div>
-            <div className="col-md-2">Temperature</div>
+            <div className="col-md-1">Seeing</div>
+            <div className="col-md-1">Temp</div>
             <div className="col-md-1">Humidity</div>
+            <div className="col-md-2">Wind</div>
           </h5>
           {data[0] ? (
             data.map((item, idx) => {
@@ -109,6 +111,7 @@ function Astronomy() {
                   transparency={item.transparency}
                   temp={item.temp2m}
                   humidity={item.rh2m}
+                  windspeed={item.wind10m}
                 />
               );
             })
@@ -117,7 +120,62 @@ function Astronomy() {
           )}
         </div>
       </div>
-      <div className={styles.forecastText}></div>
+      <div className={styles.forecastText}>
+        <h4>Parameters</h4>
+        <ul>
+          <li>
+            <h6>Time</h6>
+            Each forecast is made over 3-hour time periods for the next 48
+            hours, with{" "}
+            <span className={bgStyles.next_day}>
+              next day forecasts
+            </span> and{" "}
+            <span className={bgStyles.third_day}>third day forecasts</span>.
+          </li>
+          <li>
+            <h6>Precipitation</h6>
+            Indicates whether rain or snow might be expected.
+          </li>
+          <li>
+            <h6>Cloud Cover</h6>
+            Rough percentage of skies expected to be obstructed by clouds.
+            Accounts for all cloud layers altogether.
+          </li>
+          <li>
+            <h6>Transparency</h6>
+            Atmospherical transparency, measured in magnitudes per airmass.
+            Indicates how clarity of objects will be impaired due to airmass,
+            with lower numbers indicating less impairment.
+          </li>
+          <li>
+            <h6>Seeing</h6>
+            Astronomical seeing pertains to the stability of the atmosphere
+            overhead. Turbulences, due to heat, winds or storms may destabilize
+            air columns overhead, causing them to bend and distort light. Seeing
+            here is quantified in arc-seconds, with lower values indicating
+            better seeing conditions.
+          </li>
+          <li>
+            <h6>Temperature</h6>
+            Temperature 2m from Earth's surface.
+          </li>
+          <li>
+            <h6>Humidity</h6>
+            Relative Humidity 2m from Earth's surface.
+          </li>
+          <li>
+            <h6>Wind Speed</h6>
+            Wind speed with directions in brackets. Wind speeds coloured in red
+            indicates dangerously strong winds.
+          </li>
+        </ul>
+        <hr />
+        <p>
+          Astronomy forecast from{" "}
+          <a href="http://www.7timer.info/doc.php?lang=en">7timer.info</a>
+          {"."}
+        </p>
+      </div>
     </>
   );
 }

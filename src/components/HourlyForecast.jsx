@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./HourlyForecast.module.css";
 
 function HourlyForecast(props) {
-  // Average rainfall mm/hr
+  // Average rainfall mm/hr (0-9)
   const precipitationRates = [
     "Negligible",
     "0-0.25",
@@ -15,9 +15,8 @@ function HourlyForecast(props) {
     "50-75",
     ">75",
   ];
-  // Average cloud cover
+  // Average cloud cover (1-9)
   const cloudiness = [
-    ,
     "0%-6%",
     "6%-19%",
     "19%-31%",
@@ -100,6 +99,7 @@ function HourlyForecast(props) {
     return output;
   }
 
+  // Function takes in prec_type string and converts it into human readable form
   function decipherPrecipitation(datasetString) {
     let output = "";
     switch (datasetString) {
@@ -138,12 +138,12 @@ function HourlyForecast(props) {
       <div className="col-md-2">
         {precipitationRates[props.prec] + (props.prec === 0 ? "" : "mm/hr")}
       </div>
+      <div className="col-md-2">{cloudiness[props.cloudcover - 1]}</div>
       <div className="col-md-2">
         {props.temp}
         <span>&#8451;</span>
       </div>
       <div className="col-md-1">{props.humidity}</div>
-      <div className="col-md-2">{cloudiness[props.cloudcover]}</div>
     </div>
   );
 }
