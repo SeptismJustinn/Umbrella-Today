@@ -6,6 +6,18 @@
   height: 100vh;
   z-index: 10;
   background: rgba(0, 0, 0, 0.7);
+  transition: linear 0.5s;
+}
+
+.no_backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0);
+  transition: linear 0.5s;
 }
 
 .modal {
@@ -19,15 +31,28 @@
   border-radius: 50px;
 }
 
-.modal_small {
+.drawer {
   position: fixed;
   background: aliceblue;
-  top: 20vh;
-  left: 35%;
+  text-align: end;
+  right: -30%;
   width: 30%;
   z-index: 100;
-  padding: 50px;
-  border-radius: 50px;
+  padding: 5%;
+}
+
+.active {
+  transform: translate(-100%);
+  transition: transform 0.5s;
+}
+
+.inactive {
+  transform: translate(100%);
+  transition: transform 0.5s;
+}
+
+input {
+  margin-left: 10px;
 }
 
 form div {

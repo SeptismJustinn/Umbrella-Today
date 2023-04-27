@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
 import LocationCustomField from "./LocationCustomField";
@@ -17,6 +17,7 @@ function Overlay(props) {
   // Refs to allow for focusing onto input fields.
   const longRef = useRef();
   const latRef = useRef();
+  const [test, setTest] = useState(false);
 
   // Function to lift coordinates to Main
   function adjustCoords() {
@@ -89,19 +90,33 @@ function Overlay(props) {
       adjustCoords();
       // Set umbrella image to load
       props.setLoading(true);
+      setTest(() => {
+        setTimeout(() => {
+          props.setShowLocation(false);
+        }, 500);
+        return false;
+      });
       // Hide modal.
-      props.setShowLocation(false);
     }
   }
 
+  useEffect(() => {
+    if (!test) {
+      setTest(true);
+    }
+  }, []);
+
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.modal_small}>
-        <h2>Choose Singapore region:</h2>
+    <div className={test ? styles.backdrop : styles.no_backdrop}>
+      <div
+        className={`${styles.drawer} ${test ? styles.active : styles.inactive}`}
+      >
+        <h4>Choose region:</h4>
         <br />
-        <form className="row">
-          <div className="col-md-4">
+        <form className="container">
+          <div className="row">
             <label>
+              Central
               <input
                 type="radio"
                 value="Central"
@@ -111,11 +126,11 @@ function Overlay(props) {
                   setShowCustomField(false);
                 }}
               />
-              Central
             </label>
           </div>
-          <div className="col-md-4">
+          <div className="row">
             <label>
+              North
               <input
                 type="radio"
                 value="North"
@@ -125,11 +140,11 @@ function Overlay(props) {
                   setShowCustomField(false);
                 }}
               />
-              North
             </label>
           </div>
-          <div className="col-md-4">
+          <div className="row">
             <label>
+              East
               <input
                 type="radio"
                 value="East"
@@ -139,11 +154,11 @@ function Overlay(props) {
                   setShowCustomField(false);
                 }}
               />
-              East
             </label>
           </div>
-          <div className="col-md-4">
+          <div className="row">
             <label>
+              South
               <input
                 type="radio"
                 value="South"
@@ -153,11 +168,11 @@ function Overlay(props) {
                   setShowCustomField(false);
                 }}
               />
-              South
             </label>
           </div>
-          <div className="col-md-4">
+          <div className="row">
             <label>
+              West
               <input
                 type="radio"
                 value="West"
@@ -167,12 +182,11 @@ function Overlay(props) {
                   setShowCustomField(false);
                 }}
               />
-              West
             </label>
           </div>
-          <div className="col-md-4" />
-          <div className="col-md-4">
+          <div className="row">
             <label>
+              Current
               <input
                 type="radio"
                 value="Current"
@@ -182,11 +196,11 @@ function Overlay(props) {
                   setShowCustomField(false);
                 }}
               />
-              Current
             </label>
           </div>
-          <div className="col-md-4">
+          <div className="row">
             <label>
+              Custom
               <input
                 type="radio"
                 value="Custom"
@@ -196,7 +210,6 @@ function Overlay(props) {
                   setShowCustomField(true);
                 }}
               />
-              Custom
             </label>
           </div>
         </form>

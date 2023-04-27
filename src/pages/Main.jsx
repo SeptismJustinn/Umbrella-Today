@@ -80,7 +80,6 @@ function Main() {
         return item.prec_type;
       }
     );
-    console.log(weather12Hr);
     if (
       weather12Hr.length === 0 ||
       (currTime.getDate() - date.getDate()) * 24 +
