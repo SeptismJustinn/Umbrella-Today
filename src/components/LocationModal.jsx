@@ -12,9 +12,6 @@ function Overlay(props) {
   );
   // State to toggle box, required to initialize box in inactive state to trigger activation animation
   const [activeBox, setActiveBox] = useState(false);
-  // States to store coordinates entered into input fields
-  const [customLong, setCustomLong] = useState(props.coords[0]);
-  const [customLat, setCustomLat] = useState(props.coords[1]);
   // States to track if invalid values are entered into input fields.
   const [longErr, setLongErr] = useState(false);
   const [latErr, setLatErr] = useState(false);
@@ -28,8 +25,8 @@ function Overlay(props) {
     switch (newLocation) {
       case "Custom":
         // Extract custom coordinates from input fields.
-        coordArr[0] = Math.round(customLong * 1000) / 1000;
-        coordArr[1] = Math.round(customLat * 1000) / 1000;
+        coordArr[0] = Math.round(longRef.current.value * 1000) / 1000;
+        coordArr[1] = Math.round(latRef.current.value * 1000) / 1000;
         props.setCoords(coordArr);
         break;
       case "Current":
@@ -226,9 +223,7 @@ function Overlay(props) {
         </form>
         {showCustomField && (
           <LocationCustomField
-            coords={[customLong, customLat]}
-            setCustomLong={setCustomLong}
-            setCustomLat={setCustomLat}
+            coords={props.coords}
             longErr={longErr}
             latErr={latErr}
             setLongErr={setLongErr}

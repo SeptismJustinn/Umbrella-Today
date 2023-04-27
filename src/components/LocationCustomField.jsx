@@ -5,8 +5,7 @@ import styles from "./LocationCustomField.module.css";
 function LocationCustomField(props) {
   // Function to handle onChange for longitude input field.
   function handleLongChange(val) {
-    if (!Number.isNaN(Number(val)) && val >= -180 && val <= 180) {
-      props.setCustomLong(val);
+    if (!Number.isNaN(Number(val)) && val > -180 && val < 180) {
       props.setLongErr(false);
     } else {
       props.setLongErr(true);
@@ -16,8 +15,7 @@ function LocationCustomField(props) {
   // Function to handle onChange for latitude input field.
   function handleLatChange(val) {
     // Input validation -90 to 90 only
-    if (!Number.isNaN(Number(val)) && val >= -90 && val <= 90) {
-      props.setCustomLat(val);
+    if (!Number.isNaN(Number(val)) && val > -90 && val < 90) {
       props.setLatErr(false);
     } else {
       props.setLatErr(true);
