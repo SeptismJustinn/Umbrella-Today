@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
 
 function Overlay(props) {
+  const [active, setActive] = useState(false);
+  function handleClose() {
+    setActive(() => {
+      setTimeout(() => {
+        props.setShowAbout(false);
+      }, 500);
+      return false;
+    });
+  }
+
+  useEffect(() => {
+    // On mount, trigger activation animation.
+    if (!active) {
+      setActive(true);
+    }
+  }, []);
+
   return (
-    <div className={styles.backdrop} onClick={() => props.setShowAbout(false)}>
-      <div className={styles.modal}>
+    <div
+      className={active ? styles.backdrop : styles.no_backdrop}
+      onClick={handleClose}
+    >
+      <div
+        className={`${styles.modal} ${
+          active ? styles.active : styles.inactive
+        }`}
+      >
         Geolocation information will solely be used for query into 7Timer's API
         in order to obtain more accurate forecasts.
         <br />
