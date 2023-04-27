@@ -8,6 +8,8 @@ function Overlay(props) {
   const [showCustomField, setShowCustomField] = useState(
     props.currLocation === "Custom"
   );
+  // State to toggle box, required to initialize box in inactive state to trigger activation animation
+  const [activeBox, setActiveBox] = useState(false);
   // States to store coordinates entered into input fields
   const [customLong, setCustomLong] = useState(props.coords[0]);
   const [customLat, setCustomLat] = useState(props.coords[1]);
@@ -17,7 +19,6 @@ function Overlay(props) {
   // Refs to allow for focusing onto input fields.
   const longRef = useRef();
   const latRef = useRef();
-  const [test, setTest] = useState(false);
 
   // Function to lift coordinates to Main
   function adjustCoords() {
@@ -90,26 +91,29 @@ function Overlay(props) {
       adjustCoords();
       // Set umbrella image to load
       props.setLoading(true);
-      setTest(() => {
+      // Trigger inactivation animation and hide modal roughly when animation ends.
+      setActiveBox(() => {
         setTimeout(() => {
           props.setShowLocation(false);
         }, 500);
         return false;
       });
-      // Hide modal.
     }
   }
 
   useEffect(() => {
-    if (!test) {
-      setTest(true);
+    // On mount, activate the inactive box to trigger transform animation.
+    if (!activeBox) {
+      setActiveBox(true);
     }
   }, []);
 
   return (
-    <div className={test ? styles.backdrop : styles.no_backdrop}>
+    <div className={activeBox ? styles.backdrop : styles.no_backdrop}>
       <div
-        className={`${styles.drawer} ${test ? styles.active : styles.inactive}`}
+        className={`${styles.drawer} ${
+          activeBox ? styles.active_drawer : styles.inactive_drawer
+        }`}
       >
         <h4>Choose region:</h4>
         <br />
