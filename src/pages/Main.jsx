@@ -22,10 +22,10 @@ function Main() {
   async function getData() {
     try {
       // 7timer's init is in UTC time.
-      // const res = await fetch("/testdata/weather-test.json");
-      const res = await fetch(
-        `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=civil&output=json`
-      );
+      const res = await fetch("/testdata/weather-test.json");
+      // const res = await fetch(
+      //   `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=civil&output=json`
+      // );
       if (res.status === 200) {
         const weatherData = await res.json();
         // Clean data:
@@ -80,6 +80,7 @@ function Main() {
         return item.prec_type;
       }
     );
+    console.log(weather12Hr);
     if (
       weather12Hr.length === 0 ||
       (currTime.getDate() - date.getDate()) * 24 +
@@ -89,8 +90,13 @@ function Main() {
       // If database is not updated in the last 24 hrs...\
       return true;
     } else {
-      // Check if any rain predicted
-      return !weather12Hr.includes("none");
+      // Check if any precipitation predicted
+      return (
+        weather12Hr.includes("rain") ||
+        weather12Hr.includes("snow") ||
+        weather12Hr.includes("frzr") ||
+        weather12Hr.includes("icep")
+      );
     }
   }
 
