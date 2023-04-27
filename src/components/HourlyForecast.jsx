@@ -134,7 +134,17 @@ function HourlyForecast(props) {
           : (props.time % 12 || 12) + "PM"}
       </div>
       <div className="col-md-2">{decipherWeather(props.forecast)}</div>
-      <div className="col-md-2">{decipherPrecipitation(props.precType)}</div>
+      <div
+        className={`col-md-2 ${
+          props.precType === "none"
+            ? ""
+            : props.precType === "rain" || props.precType === "snow"
+            ? styles.prec_text
+            : styles.danger_text
+        }`}
+      >
+        {decipherPrecipitation(props.precType)}
+      </div>
       <div className="col-md-2">
         {precipitationRates[props.prec] + (props.prec === 0 ? "" : "mm/hr")}
       </div>

@@ -101,9 +101,7 @@ function HourlyAstronomy(props) {
           : (props.time % 12 || 12) + "PM"}
       </div>
       <div
-        className={`col-md-2 ${
-          props.prec === "none" ? "" : styles.danger_text
-        }`}
+        className={`col-md-2 ${props.prec === "none" ? "" : styles.prec_text}`}
       >
         {decipherPrecipitation(props.prec)}
       </div>

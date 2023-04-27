@@ -92,7 +92,11 @@ function Forecast() {
           <li>
             <h6>Precipitation</h6>
             Describes what type of precipitation is to be expected over the 3
-            hours.
+            hours: <span className={bgStyles.prec_text}>Rain</span>,
+            <span className={bgStyles.prec_text}> Snow</span>,
+            <span className={bgStyles.danger_text}> Freezing rain</span>,
+            <span className={bgStyles.danger_text}> Ice pellets </span>
+            or None.
           </li>
           <li>
             <h6>Precipitation Rate</h6>
