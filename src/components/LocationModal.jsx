@@ -4,6 +4,8 @@ import styles from "./Modal.module.css";
 import LocationCustomField from "./LocationCustomField";
 
 function Overlay(props) {
+  // State to hold new location before confirm click
+  const [newLocation, setNewLocation] = useState(props.currLocation);
   // State to toggle custom coordinate input fields
   const [showCustomField, setShowCustomField] = useState(
     props.currLocation === "Custom"
@@ -23,7 +25,7 @@ function Overlay(props) {
   // Function to lift coordinates to Main
   function adjustCoords() {
     const coordArr = [0, 0];
-    switch (props.currLocation) {
+    switch (newLocation) {
       case "Custom":
         // Extract custom coordinates from input fields.
         coordArr[0] = Math.round(customLong * 1000) / 1000;
@@ -80,25 +82,30 @@ function Overlay(props) {
   }
 
   // Function to handle confirm button click.
-  function handleConfirm() {
-    // Focus on erroneous fields.
-    if (longErr) {
-      return longRef.current.focus();
-    } else if (latErr) {
-      return latRef.current.focus();
-    } else {
-      // Lift coords
-      adjustCoords();
-      // Set umbrella image to load
-      props.setLoading(true);
-      // Trigger inactivation animation and hide modal roughly when animation ends.
-      setActiveBox(() => {
-        setTimeout(() => {
-          props.setShowLocation(false);
-        }, 500);
-        return false;
-      });
+  function handleConfirm(confirmed) {
+    // If confirm button click
+    if (confirmed) {
+      // Focus on erroneous fields.
+      if (longErr) {
+        return longRef.current.focus();
+      } else if (latErr) {
+        return latRef.current.focus();
+      } else {
+        // Set umbrella image to load
+        props.setLoading(true);
+        // Set new location
+        props.setCurrLocation(newLocation);
+        // Lift coords
+        adjustCoords();
+      }
     }
+    // Trigger inactivation animation and hide modal roughly when animation ends.
+    setActiveBox(() => {
+      setTimeout(() => {
+        props.setShowLocation(false);
+      }, 500);
+      return false;
+    });
   }
 
   useEffect(() => {
@@ -124,9 +131,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="Central"
-                checked={props.currLocation === "Central"}
+                checked={newLocation === "Central"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(false);
                 }}
               />
@@ -138,9 +145,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="North"
-                checked={props.currLocation === "North"}
+                checked={newLocation === "North"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(false);
                 }}
               />
@@ -152,9 +159,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="East"
-                checked={props.currLocation === "East"}
+                checked={newLocation === "East"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(false);
                 }}
               />
@@ -166,9 +173,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="South"
-                checked={props.currLocation === "South"}
+                checked={newLocation === "South"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(false);
                 }}
               />
@@ -180,9 +187,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="West"
-                checked={props.currLocation === "West"}
+                checked={newLocation === "West"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(false);
                 }}
               />
@@ -194,9 +201,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="Current"
-                checked={props.currLocation === "Current"}
+                checked={newLocation === "Current"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(false);
                 }}
               />
@@ -208,9 +215,9 @@ function Overlay(props) {
               <input
                 type="radio"
                 value="Custom"
-                checked={props.currLocation === "Custom"}
+                checked={newLocation === "Custom"}
                 onChange={(event) => {
-                  props.setCurrLocation(event.target.value);
+                  setNewLocation(event.target.value);
                   setShowCustomField(true);
                 }}
               />
@@ -236,7 +243,7 @@ function Overlay(props) {
             className="btn btn-primary col-md-6"
             onClick={(event) => {
               event.preventDefault();
-              handleConfirm();
+              handleConfirm(true);
             }}
           >
             Confirm
@@ -245,7 +252,7 @@ function Overlay(props) {
             className="btn btn-danger col-md-6"
             onClick={(event) => {
               event.preventDefault();
-              props.setShowLocation(false);
+              handleConfirm(false);
             }}
           >
             Cancel

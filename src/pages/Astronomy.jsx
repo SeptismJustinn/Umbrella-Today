@@ -20,10 +20,9 @@ function Astronomy() {
 
   async function getAstro() {
     try {
-      const res = await fetch("/testdata/astro-test.json");
-      // const res = await fetch(
-      //   `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=astro&output=json`
-      // );
+      const res = await fetch(
+        `https://www.7timer.info/bin/api.pl?lon=${coords[0]}&lat=${coords[1]}&product=astro&output=json`
+      );
       if (res.status === 200) {
         const dat = await res.json();
         // Clean data:
