@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./AstroCorner.module.css";
 
 function AstroCorner(props) {
+  // Check system time if it is daytime.
   function checkDaytime() {
     const time = new Date().getHours();
     return time > 6 && time < 18;

@@ -40,6 +40,9 @@ function Overlay(props) {
         App was designed in Singapore's context and as such, caters primarily to
         GMT +8 timezones.
         <br />
+        Daytime determined using system's time and is generically calculated as
+        system time between 6 AM and 6 PM.
+        <br />
         Should any instance of rain be predicted up to 12 hours from time of
         launching app, umbrella would be recommended.
         <br />
