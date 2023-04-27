@@ -64,7 +64,12 @@ function Overlay(props) {
         <a href="https://www.irasutoya.com/" target="_blank">
           みふねたかし
         </a>
-        .
+        .<br />
+        Components from{" "}
+        <a href="https://mui.com/" target="_blank">
+          Material UI
+        </a>{" "}
+        were utilized.
       </div>
     </div>
   );
