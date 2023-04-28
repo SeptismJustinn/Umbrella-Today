@@ -20,9 +20,7 @@ This app was built with React. App comprises of 3 pages, linked via React Router
 
 ### CSS
 
-Where positioning with bootstrap proved complicated, CSS was used for more strictly positioned elements.
-
-CSS was also utilized to provide animations via transitions when modals/drawers were clicked.
+Where positioning with bootstrap proved complicated, CSS was used for more strictly positioned elements. CSS was also utilized to provide animations via transitions when modals/drawers were clicked.
 
 ### Material UI
 
@@ -33,19 +31,22 @@ CSS was also utilized to provide animations via transitions when modals/drawers 
 ## Wireframes
 
 Main page wireframe, detailing interactive elements with plans on how they would function. This wireframe shows what the main page would look like if no rain was forecast.
+
 ![Main page](public/readme/umbrella-wireframe-1.png "Main page")
 
 Alternate main page wireframe, featuring main page if rain was forecast.
+
 ![Main page2](public/readme/umbrella-wireframe-2.png "Main page 2")
 
 Forecast/Astronomy page wireframe, a rough design to show how the field displaying data might look like.
+
 ![Forecast page](public/readme/umbrella-wireframe-3.png "Forecast page")
 
 <br />
 
 ## User Stories
 
-This app was made for users who are rushing out to start the day but is wondering **whether to invest carry-on space on their pocket umbrellas**. When these users open up this app, they would be advised on whether to bring their umbrellas as quickly as the app can fetch data from their devices and can thus, more quickly arrive at their decision before busting out the door.
+This app was made for users who are rushing out to start the day but are wondering **whether to invest carry-on space on their pocket umbrellas**. When these users open up this app, they would be advised on whether to bring their umbrellas as quickly as the app can fetch data from their devices and can thus, more quickly arrive at their decision before busting out the door.
 
 ### Additional forecast information
 
@@ -53,7 +54,7 @@ As obtaining all these weather data only for the user to have an extremely simpl
 
 ### Astronomy forecast for stargazers
 
-The weather is one of the biggest threats to stargazing and as such, users in the stargazing community are able to utilize this app to gauge how conducive the weather at night would be for their activities. Additionally, **astronomy-specific weather data** (atmospheric transparency, astronomical seeing etc) are also presented on a separate page of the app, forecasting weather conditions that would significantly affect astronomical observations.
+The weather is one of the biggest hindrances to stargazing and as such, users in the stargazing community are able to utilize this app to gauge how conducive the weather at night would be for their activities. **Astronomy-specific weather data** (atmospheric transparency, astronomical seeing etc) are presented on a separate page of the app, forecasting weather conditions that could significantly affect astronomical observations.
 
 ### Region specificity
 
